@@ -3,8 +3,8 @@
 #define UNSIGNED_LONG_MAX 4294967295
 #define WHEEL_FORWARD 1
 #define WHEEL_REVERSE -1
+#include "ArduinoCompat.hpp"
 
-#include <Arduino.h>
 
 class DeadReckoner {
 

@@ -1,6 +1,6 @@
-
 #include "PurePursuit.h"
-#include <Arduino.h>
+#include "ArduinoCompat.hpp"
+#include <math.h>
 
 // Constructor.
 PurePursuit::PurePursuit(double* xPos, double* yPos, double *heading, double LOOK_AHEAD, unsigned long INTERVAL, int STOP_POINT)
@@ -63,10 +63,10 @@ void PurePursuit::computeNextGoalPoint()
 			minIterY = iterY;
 		}
 
-		// Serial.print(iterX); Serial.print("\t");
-		// Serial.print(iterY); Serial.print("\t");
-		// Serial.print(prevDist); Serial.print("\t");
-		// Serial.println(dist);
+		// Serial::print(iterX); Serial::print("\t");
+		// Serial::print(iterY); Serial::print("\t");
+		// Serial::print(prevDist); Serial::print("\t");
+		// Serial::println(dist);
 
 		if (prevDist < dist || !path.hasNext())
 		{
@@ -105,7 +105,7 @@ void PurePursuit::compute()
 		// 1. Get the current location of the vehicle.
 		double xPos = *_xPos;
 		double yPos = *_yPos;
-		double phi = *_heading - PI / 2;
+		double phi = *_heading - M_PI / 2;
 
 		// 2, 3. Find the goal point.
 		computeNextGoalPoint();
@@ -126,14 +126,14 @@ void PurePursuit::compute()
 		// Vehicle's position is updated using dead reckoning at set interval.
 
 		// Print debug info
-		// Serial.print("c: "); Serial.print(_curvature);
-		// Serial.print(", xPos: "); Serial.print(xPos);
-		// Serial.print(", yPos: "); Serial.print(yPos);
-		// Serial.print(", xGoal: "); Serial.print(_goalX);
-		// Serial.print(", yGoal: "); Serial.println(_goalY);
+		// Serial::print("c: "); Serial::print(_curvature);
+		// Serial::print(", xPos: "); Serial::print(xPos);
+		// Serial::print(", yPos: "); Serial::print(yPos);
+		// Serial::print(", xGoal: "); Serial::print(_goalX);
+		// Serial::print(", yGoal: "); Serial::println(_goalY);
 
-		// Serial.print(_goalX); Serial.print("\t");
-		// Serial.println(_goalY);
+		// Serial::print(_goalX); Serial::print("\t");
+		// Serial::println(_goalY);
 
 		// 7. Check for stop condition
 		if (!path.hasNext())
@@ -151,16 +151,16 @@ void PurePursuit::compute()
 			float theta = fabs(phi2 - phi1);
 			if (theta < PI/2 || theta > 3*PI/2)
 			{
-				// Serial.println("STOP TRUE");
-				// Serial.print(p0x); Serial.print("\t");
-				// Serial.print(p0y); Serial.print("\t");
-				// Serial.print(p1x); Serial.print("\t");
-				// Serial.print(p1y); Serial.print("\t");
-				// Serial.print(p2x); Serial.print("\t");
-				// Serial.print(p2y); Serial.print("\t");
-				// Serial.print(phi1); Serial.print("\t");
-				// Serial.print(phi2); Serial.print("\t");
-				// Serial.println(theta);
+				// Serial::println("STOP TRUE");
+				// Serial::print(p0x); Serial::print("\t");
+				// Serial::print(p0y); Serial::print("\t");
+				// Serial::print(p1x); Serial::print("\t");
+				// Serial::print(p1y); Serial::print("\t");
+				// Serial::print(p2x); Serial::print("\t");
+				// Serial::print(p2y); Serial::print("\t");
+				// Serial::print(phi1); Serial::print("\t");
+				// Serial::print(phi2); Serial::print("\t");
+				// Serial::println(theta);
 				_stop = true;
 			}
 		}
@@ -174,7 +174,7 @@ void PurePursuit::setPath(float* pathX, float* pathY, int pathLength)
 {
 	if (pathLength < MIN_PATH_LENGTH)
 	{
-		Serial.print("ERROR: Path length must be minimum of "); Serial.println(MIN_PATH_LENGTH);
+		Serial::print("ERROR: Path length must be minimum of "); Serial::println(MIN_PATH_LENGTH);
 		return;
 	}
 	if (_path == nullptr)

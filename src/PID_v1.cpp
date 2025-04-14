@@ -12,7 +12,7 @@
 // #endif
 
 #include "PID_v1.h"
-#include <Arduino.h>
+#include "ArduinoCompat.hpp"
 
 /*Constructor (...)*********************************************************
  *    The parameters specified here are those for for which we can't set up

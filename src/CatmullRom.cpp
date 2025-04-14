@@ -1,5 +1,5 @@
 #include "CatmullRom.h"
-#include <Arduino.h>
+#include "ArduinoCompat.hpp"
 
 CatmullRom::CatmullRom() { }
 
@@ -20,17 +20,17 @@ void CatmullRom::setPoints(float* pathX, float* pathY, int numPoints)
 // Print path to serial monitor neatly.
 void CatmullRom::printPath()
 {
-    Serial.println("-------------------------------------------------------------");
-    Serial.println("PRINTING PATH");
-    Serial.println("x\ty\ti");
+    Serial::println("-------------------------------------------------------------");
+    Serial::println("PRINTING PATH");
+    Serial::println("x\ty\ti");
     for (int i = 0; i < _numPoints; i++)
     {
-        Serial.print(_pathX[i]); Serial.print("\t");
-        Serial.print(_pathY[i]); Serial.print("\t");
-        Serial.println(i);
+        Serial::print(_pathX[i]); Serial::print("\t");
+        Serial::print(_pathY[i]); Serial::print("\t");
+        Serial::println(i);
     }
-    Serial.println("PRINT PATH COMPLETE");
-    Serial.println("-------------------------------------------------------------");
+    Serial::println("PRINT PATH COMPLETE");
+    Serial::println("-------------------------------------------------------------");
 }
 
 // Next iteration
@@ -49,11 +49,11 @@ bool CatmullRom::next()
         }
         interpolate(_iterationArrayIndex, _t, &_iterationX, &_iterationY);
 
-        // Serial.print(_iterationX); Serial.print("\t");
-        // Serial.print(_iterationY); Serial.print("\t");
-        // Serial.print(_parameterStepSize); Serial.print("\t");
-        // Serial.print(_t); Serial.print("\t");
-        // Serial.println(_iterationArrayIndex);
+        // Serial::print(_iterationX); Serial::print("\t");
+        // Serial::print(_iterationY); Serial::print("\t");
+        // Serial::print(_parameterStepSize); Serial::print("\t");
+        // Serial::print(_t); Serial::print("\t");
+        // Serial::println(_iterationArrayIndex);
 
         return true;
     }
@@ -79,11 +79,11 @@ bool CatmullRom::prev()
         }
         interpolate(_iterationArrayIndex, _t, &_iterationX, &_iterationY);
 
-        // Serial.print(_iterationX); Serial.print("\t");
-        // Serial.print(_iterationY); Serial.print("\t");
-        // Serial.print(_parameterStepSize); Serial.print("\t");
-        // Serial.print(_t); Serial.print("\t");
-        // Serial.println(_iterationArrayIndex);
+        // Serial::print(_iterationX); Serial::print("\t");
+        // Serial::print(_iterationY); Serial::print("\t");
+        // Serial::print(_parameterStepSize); Serial::print("\t");
+        // Serial::print(_t); Serial::print("\t");
+        // Serial::println(_iterationArrayIndex);
 
         return true;
     }
@@ -163,7 +163,7 @@ int CatmullRom::getLength()
 
 float CatmullRom::getDistance(float x1, float y1, float x2, float y2)
 {
-    return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
+    return  sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 }
 
 // Perform catmullRomInterpolation at the ith point on ary using parameter t.
@@ -184,7 +184,7 @@ void CatmullRom::interpolate(int i, float t, float* x, float* y)
     else
     {
         // Invalid input.
-        // Serial.println("ERROR: interpolate");
+        // Serial::println("ERROR: interpolate");
     }
     
 }
@@ -201,7 +201,7 @@ float CatmullRom::getParameterStep(int i, float targetStep)
     else
     {
         // Invalid input
-        // Serial.println("ERROR: getParameterStep");
+        // Serial::println("ERROR: getParameterStep");
         return -1;
     }
     

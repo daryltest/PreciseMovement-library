@@ -1,5 +1,5 @@
 #include "DeadReckoner.h"
-#include <Arduino.h>
+#include "ArduinoCompat.hpp"
 
 DeadReckoner::DeadReckoner() { }
 
@@ -112,13 +112,13 @@ void DeadReckoner::computeAngularVelocities() {
 
 	unsigned long lt = (*leftTicks);
 	unsigned long rt = (*rightTicks);
-	// Serial.print("\twl: "); Serial.print(wl*toRPM);
-	// Serial.print("\twr: "); Serial.print(wr*toRPM);
-	// Serial.print("\tdt: "); Serial.print(dt_omega);
-	// Serial.print("\tlt: "); Serial.print(lt);
-	// Serial.print("\trt: "); Serial.print((rt));
-	// Serial.print("\tDlt: "); Serial.print(changeLeftTicks);
-	// Serial.print("\tDrt: "); Serial.println(changeRightTicks);
+	// Serial::print("\twl: "); Serial::print(wl*toRPM);
+	// Serial::print("\twr: "); Serial::print(wr*toRPM);
+	// Serial::print("\tdt: "); Serial::print(dt_omega);
+	// Serial::print("\tlt: "); Serial::print(lt);
+	// Serial::print("\trt: "); Serial::print((rt));
+	// Serial::print("\tDlt: "); Serial::print(changeLeftTicks);
+	// Serial::print("\tDrt: "); Serial::println(changeRightTicks);
 
 	leftTicksPrev = *leftTicks;
 	rightTicksPrev = *rightTicks;
@@ -153,15 +153,15 @@ void DeadReckoner::computePosition() {
 		// Debug Info
 		// float toRPM = 30 / PI;
 		// float dist = sqrt(xc*xc + yc*yc);
-		// Serial.print("dist: "); Serial.print(dist);
-		// Serial.print("\tx: "); Serial.print(xc);
-		// Serial.print("\ty: "); Serial.print(yc);
-		// Serial.print("\theading: "); Serial.print(heading*RAD_TO_DEG);
-		// Serial.print("\twl: "); Serial.print(wl*toRPM, 5);
-		// Serial.print("\twr: "); Serial.print(wr*toRPM, 5);
-		// Serial.print("\tVl: "); Serial.print(Vl);
-		// Serial.print("\tVr: "); Serial.print(Vr);
-		// Serial.print("\tw: "); Serial.println(w);
+		// Serial::print("dist: "); Serial::print(dist);
+		// Serial::print("\tx: "); Serial::print(xc);
+		// Serial::print("\ty: "); Serial::print(yc);
+		// Serial::print("\theading: "); Serial::print(heading*RAD_TO_DEG);
+		// Serial::print("\twl: "); Serial::print(wl*toRPM, 5);
+		// Serial::print("\twr: "); Serial::print(wr*toRPM, 5);
+		// Serial::print("\tVl: "); Serial::print(Vl);
+		// Serial::print("\tVr: "); Serial::print(Vr);
+		// Serial::print("\tw: "); Serial::println(w);
 
 		prevIntegrationTime = micros();
 	}

@@ -11,7 +11,8 @@
 #include "EncoderManager.h"
 #include "MotorManager.h"
 #include "FunctionType.h"
-#include <Arduino.h>
+
+#include <math.h>
 
 class CatmullRom;
 
@@ -65,7 +66,7 @@ private:
 	static constexpr int _TEMP_PATH_LENGTH = 5;
 	float _tempPathX[_TEMP_PATH_LENGTH];
 	float _tempPathY[_TEMP_PATH_LENGTH];
-	static constexpr float _END_STEP_ANGLE = 0.001 * PI/180; // rad
+	static constexpr float _END_STEP_ANGLE = 0.001 * M_PI/180; // rad
 	void computeCurvePathPoint(float* x, float* y, float theta, float turningRadius, float transformAngle, float isLeftTurn);
 
 	// Motors

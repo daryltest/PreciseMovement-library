@@ -4,7 +4,6 @@
 #define PurePursuit_h
 
 #include "CatmullRom.h"
-#include <Arduino.h>
 
 class PurePursuit
 {

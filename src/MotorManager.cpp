@@ -1,5 +1,5 @@
 #include "MotorManager.h"
-#include <Arduino.h>
+#include "ArduinoCompat.hpp"
 
 MotorManager::MotorManager(functiontypeint leftForward, functiontypeint leftReverse,
                 functiontypeint rightForward, functiontypeint rightReverse, functiontype stop)
@@ -31,7 +31,7 @@ void MotorManager::leftForward(int speed)
 {
     // Convert speed in percentag to value
     int speedVal = map(speed, 0, 100, _min, _max);
-    // Serial.print("LF:\t"); Serial.print(speedVal); Serial.print("\t");
+    // Serial::print("LF:\t"); Serial::print(speedVal); Serial::print("\t");
     _leftForward(speedVal);
 }
 
@@ -46,7 +46,7 @@ void MotorManager::rightForward(int speed)
 {
     // Convert speed in percentag to value
     int speedVal = map(speed, 0, 100, _min, _max);
-    // Serial.print("RF:\t"); Serial.println(speedVal);
+    // Serial::print("RF:\t"); Serial::println(speedVal);
     _rightForward(speedVal);
 }
 

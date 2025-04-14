@@ -1,6 +1,5 @@
 #include "EncoderManager.h"
 #include "FunctionType.h"
-#include <Arduino.h>
 
 EncoderManager::EncoderManager(volatile unsigned long* leftEncoderPos, volatile unsigned long* rightEncoderPos, int ticksPerRev)
 {

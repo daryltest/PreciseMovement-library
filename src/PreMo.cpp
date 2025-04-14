@@ -1,4 +1,5 @@
 #include "PreMo.h"
+#include "ArduinoCompat.hpp"
 
 
 /*
@@ -136,7 +137,7 @@ void PreMo::twist(float targetHeading, int direction)
 	targetHeading = targetHeading - 360 * floor(targetHeading / 360);
 
 	double heading = (*_deadReckoner).getHeading()*RAD_TO_DEG;
-	// Serial.print("heading: "); Serial.print(heading);
+	// Serial::print("heading: "); Serial::print(heading);
 	heading = heading - 360 * floor(heading / 360);
 
 	// float delta = heading - targetHeading;
@@ -170,18 +171,18 @@ void PreMo::twist(float targetHeading, int direction)
 		delta = (fabs(deltaCCW) < fabs(deltaCW)) ? (deltaCCW) : (deltaCW);
 	}
 
-	// Serial.print("\theading2: "); Serial.print(heading);
-	// Serial.print("\ttheading: "); Serial.print(targetHeading);
-	// Serial.print("\tdelta1: "); Serial.print(delta1);
-	// Serial.print("\tdelta2: "); Serial.print(delta2);
-	// Serial.print("\tdelta: "); Serial.println(delta);
+	// Serial::print("\theading2: "); Serial::print(heading);
+	// Serial::print("\ttheading: "); Serial::print(targetHeading);
+	// Serial::print("\tdelta1: "); Serial::print(delta1);
+	// Serial::print("\tdelta2: "); Serial::print(delta2);
+	// Serial::print("\tdelta: "); Serial::println(delta);
 
 	twistDelta(delta);
 }
 
 void PreMo::twistDelta(float angle)
 {
-	// Serial.print("angle: "); Serial.println(angle);
+	// Serial::print("angle: "); Serial::println(angle);
 	_setpointMotorLeft = 40; // RPM
 	_setpointMotorRight = 40;
 	_inputMotorLeft = 0;
@@ -193,7 +194,7 @@ void PreMo::twistDelta(float angle)
 	_twistAngle = angle;
 	_isTwisting = true;
 
-	// Serial.print("target: "); Serial.println(_targetHeading);
+	// Serial::print("target: "); Serial::println(_targetHeading);
 }
 
 void PreMo::continueTwist()
@@ -229,10 +230,10 @@ void PreMo::continueTwist()
 		(*_pidMotorLeft).Compute();
 		(*_pidMotorRight).Compute();
 
-		// Serial.print(heading);
-		// Serial.print(", "); Serial.print(heading - _targetHeading);
-		// Serial.print(", ");  Serial.print(_inputMotorLeft);
-		// Serial.print(", "); Serial.println(_inputMotorRight);
+		// Serial::print(heading);
+		// Serial::print(", "); Serial::print(heading - _targetHeading);
+		// Serial::print(", ");  Serial::print(_inputMotorLeft);
+		// Serial::print(", "); Serial::println(_inputMotorRight);
 	}
 	else
 	{
@@ -263,11 +264,11 @@ void PreMo::computeCurvePathPoint(float* x, float* y, float theta, float turning
 
 	transformCoordinate(&xip, &yip, transformAngle, xPos, yPos);
 
-	// Serial.print(xPos); Serial.print("\t");
-	// Serial.print(yPos); Serial.print("\t");
-	// Serial.print(theta); Serial.print("\t");
-	// Serial.print(xip); Serial.print("\t");
-	// Serial.println(yip);
+	// Serial::print(xPos); Serial::print("\t");
+	// Serial::print(yPos); Serial::print("\t");
+	// Serial::print(theta); Serial::print("\t");
+	// Serial::print(xip); Serial::print("\t");
+	// Serial::println(yip);
 
 	*x = xip;
 	*y = yip;
@@ -299,11 +300,11 @@ void PreMo::startPathFollowing(float* pathX, float* pathY, int pathLength, bool 
 
 	double heading = atan2(y1 - y0, x1 - x0);
 
-	// Serial.print("x0: "); Serial.print(x0);
-	// Serial.print("\ty0: "); Serial.print(y0);
-	// Serial.print("\tx1: "); Serial.print(x1);
-	// Serial.print("\ty1: "); Serial.print(y1);
-	// Serial.print("\theading: "); Serial.println(heading);
+	// Serial::print("x0: "); Serial::print(x0);
+	// Serial::print("\ty0: "); Serial::print(y0);
+	// Serial::print("\tx1: "); Serial::print(x1);
+	// Serial::print("\ty1: "); Serial::print(y1);
+	// Serial::print("\theading: "); Serial::println(heading);
 
 	// Set the location to the initial coordinates.
 	DeadReckoner& dr = (*_deadReckoner);
@@ -331,10 +332,10 @@ void PreMo::startPathFollowing(float* pathX, float* pathY, int pathLength, bool 
 	// double x = dr.getX();
 	// double y = dr.getY();
 	// double t = dr.getHeading();
-	// Serial.println("DEAD RECKONER SET");
-	// Serial.print("x: "); Serial.print(x);
-	// Serial.print(", y: "); Serial.print(y);
-	// Serial.print(", t: "); Serial.println(t);
+	// Serial::println("DEAD RECKONER SET");
+	// Serial::print("x: "); Serial::print(x);
+	// Serial::print(", y: "); Serial::print(y);
+	// Serial::print(", t: "); Serial::println(t);
 }
 
 void PreMo::setPathFollowSpeed(int speedPercentage)
@@ -359,7 +360,7 @@ void PreMo::continuePathFollowing()
 	(*_pid).Compute();
 
 	// Move the robot
-	// Serial.print("output: "); Serial.println(_output);
+	// Serial::print("output: "); Serial::println(_output);
 	moveMotors(_motorSpeed, _output);
 
 	if ((*_purePursuit).checkStop())
